@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Poniżej dopisujemy utworzoną przez nas aplikacje
+    'library'
+    # To fajen do testowania co nie dziala
+    # 'debugtools'
 ]
 
 MIDDLEWARE = [

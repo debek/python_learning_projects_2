@@ -17,9 +17,15 @@ from django.contrib import admin
 from django.urls import path
 # To poniżej zaimportowaliśmy. Służy między innymi do szybkiego wpisania tekstu na WWW
 from django.http import HttpResponse
+import library.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # To poniżej pozwala bezpośrednio odpalić jakiś tekst na WWW
-    path('', lambda request: HttpResponse("Witaj na mojej stronie!"))
+
+    # To poniżej pozwala bezpośrednio odpalić jakiś tekst na WWW. To takie tymczasowe rozwiązanie.
+    # path('', lambda request: HttpResponse("Witaj na mojej stronie!"))
+
+    # To poniżej importuje z pliku views.py funkcje
+    path('', library.views.home)
+
 ]
