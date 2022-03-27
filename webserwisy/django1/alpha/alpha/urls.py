@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+# To poniżej zaimportowaliśmy. Służy między innymi do szybkiego wpisania tekstu na WWW
+from django.http import HttpResponse
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # To poniżej pozwala bezpośrednio odpalić jakiś tekst na WWW
+    path('', lambda request: HttpResponse("Witaj na mojej stronie!"))
 ]
