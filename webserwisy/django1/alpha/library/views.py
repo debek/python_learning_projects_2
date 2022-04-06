@@ -9,9 +9,7 @@ from django.http import HttpResponse
 #     return HttpResponse("Witaj na mojej stronie zbudowanej za pomocą widoku.")
 
 def home(requests):
-    print(requests)
-    # To fajne do testowania co nie dziala
-    # context = {'title': "Pierwsza strona", 'dump': requests}
+    # Poniżej to do testowania strony czyli debugtools
     context = {'title': "Pierwsza strona", 'dump': requests}
     return render(requests, 'library/index.html', context)
 

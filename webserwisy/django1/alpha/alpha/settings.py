@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Poniżej dopisujemy utworzoną przez nas aplikacje
-    'library'
+    'library',
     # To fajen do testowania co nie dziala
-    # 'debugtools'
+    'debugtools',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +66,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+            ],
+            'builtins': [                                     # Add this section
+                "debugtools.templatetags.debugtools_tags",   # Add this line
             ],
         },
     },
