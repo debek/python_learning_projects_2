@@ -26,7 +26,7 @@ urlpatterns = [
     # path('', lambda request: HttpResponse("Witaj na mojej stronie!"))
 
     # To poniżej importuje z pliku views.py funkcje
-    path('', library.views.home),
+    path('', library.views.home, name="home"),
     path('books/<int:book_id>', library.views.book, name="book"),
     path('author/<int:author_id>', library.views.author, name="author"),
 
