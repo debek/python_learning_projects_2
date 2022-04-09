@@ -12,7 +12,7 @@ def home(requests):
     books = Book.objects.all()
 
     # Poniżej to do testowania strony czyli debugtools
-    context = {'title': "Pierwsza strona",
+    context = {'title': "Moja biblioteka",
                'dump': requests,
                'books': books,
                }

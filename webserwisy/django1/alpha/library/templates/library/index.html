@@ -14,8 +14,9 @@
     Posiadamy następujęca książki:
     <ul>
     {% for book in books %}
-        <li><a href="/books/{{ book.id }}">Książka {{ book.title }}</a></li>
-    {% endfor %}
+        {# <li><a href="/books/{{ book.id }}">Książka {{ book.title }}</a></li> #}
+        <li><a href="{% url 'book' book.id %}">Książka {{ book.title }}</a></li>
+        {% endfor %}
     </ul>
 {% else %}
     Na razie brak książek
