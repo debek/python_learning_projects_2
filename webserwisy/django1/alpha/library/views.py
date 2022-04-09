@@ -22,3 +22,8 @@ def home(requests):
 def book(request, book_id):
     book = Book.objects.get(id=book_id)
     return render(request, 'library/book.html', {'book': book})
+
+def author(request, author_id):
+    author = Author.objects.get(id=author_id)
+    books = author.book_set.all()
+    return render(request, 'library/author.html', {'author': author, 'books': books})

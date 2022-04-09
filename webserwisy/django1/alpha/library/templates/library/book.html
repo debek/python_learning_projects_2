@@ -10,5 +10,7 @@
 
 <p>{{ book.description }}</p>
 
+<p>by <a href="{% url 'author' book.author.id %}">Książka {{ book.author.name }}</a></p>
+
 </body>
 </html>

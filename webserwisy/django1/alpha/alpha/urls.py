@@ -27,6 +27,7 @@ urlpatterns = [
 
     # To poniżej importuje z pliku views.py funkcje
     path('', library.views.home),
-    path('books/<int:book_id>', library.views.book, name="book")
+    path('books/<int:book_id>', library.views.book, name="book"),
+    path('author/<int:author_id>', library.views.author, name="author"),
 
 ]
