@@ -14,7 +14,7 @@
     Posiadamy następujęca książki:
     <ul>
     {% for book in books %}
-        <li><a href="/books/{{ book.id }}">"Książka {{ book.title }}</a></li>
+        <li><a href="/books/{{ book.id }}">Książka {{ book.title }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
