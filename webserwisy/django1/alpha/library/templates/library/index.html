@@ -10,7 +10,16 @@
 {# {% print %} #}
 {# {% print dump %} #}
 
-
+{% if books %}
+    Posiadamy następujęca książki:
+    <ul>
+    {% for book in books %}
+        <li>Książka {{ book.title }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    Na razie brak książek
+{% endif %}
 
 </body>
 </html>
