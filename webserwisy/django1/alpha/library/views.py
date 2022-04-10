@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Book, Author
-from .forms import AddBookForm, BookForm_ModelForm
+from .forms import AddBookForm, BookForm_ModelForm, DeleteBookForm
 from django.urls import reverse
 from django.contrib import messages
 
@@ -25,8 +25,16 @@ def book(request, book_id):
     # book = Book.objects.get(id=book_id)
     # To poniżej to jest djangoshorcut i da nam 404 jeśli strona nie istnieje
     book = get_object_or_404(Book, id=book_id)
+    if request.method == "POST":
+        form = DeleteBookForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data["operation"] == "delete":
+                book.delete()
+                messages.success(request, "Usunięto książkę")
+                return HttpResponseRedirect(reverse("home"))
+    delete_form = DeleteBookForm()
 
-    return render(request, 'library/book.html', {'book': book})
+    return render(request, 'library/book.html', {'book': book, "delete_form": delete_form})
 
 def author(request, author_id):
     author = Author.objects.get(id=author_id)
@@ -66,7 +74,12 @@ def add_book_modelform(request):
         if form.is_valid():
             book = form.save()
             messages.success(request, "Dodano książkę")
-            return HttpResponseRedirect(reverse('book', args=(book.id,)))
+            # To poznizej dodalismy w models wiec pozbywam sie tego
+            # return HttpResponseRedirect(reverse('book', args=(book.id,)))
+            return HttpResponseRedirect(book.get_absolute_url())
+            # To poznizej dodalismy w models wiec pozbywam sie tego
+            # return HttpResponseRedirect(reverse('book', args=(book.id,)))
+        return HttpResponseRedirect(book.get_absolute_url())
     else:
         form = BookForm_ModelForm()
     return render(request, 'library/add_book.html', {'form': form})
