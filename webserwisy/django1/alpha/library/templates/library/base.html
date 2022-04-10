@@ -7,6 +7,12 @@
 </head>
 <body>
 <header><a href="{% url 'home'%}">Strona główna</a></header>
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
 {% block content %}
 {% endblock %}
 </body>

@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Book, Author
-from .forms import AddBookForm
+from .forms import AddBookForm, BookForm_ModelForm
 from django.urls import reverse
+from django.contrib import messages
 
 
 # To poniżej było na szybko przykładowe
@@ -45,6 +46,10 @@ def add_book(request):
                 description=form.cleaned_data["description"]
             )
             book.save()
+            # uzyjemu messages do wyświetlenia, że coś zostąło dodane
+            # messages.add_message(request, messages.SUCCESS, "Dodano książkę")
+            messages.success(request, "Dodano książkę")
+
             # print(form.cleaned_data)
             #reverse przechodzi na stronę, którą wygenerowaliśmy
             return HttpResponseRedirect(reverse('book', args=(book.id,)))
@@ -53,4 +58,15 @@ def add_book(request):
     else:
         form = AddBookForm()
 
+    return render(request, 'library/add_book.html', {'form': form})
+
+def add_book_modelform(request):
+    if request.method == "POST":
+        form = BookForm_ModelForm(request.POST)
+        if form.is_valid():
+            book = form.save()
+            messages.success(request, "Dodano książkę")
+            return HttpResponseRedirect(reverse('book', args=(book.id,)))
+    else:
+        form = BookForm_ModelForm()
     return render(request, 'library/add_book.html', {'form': form})
