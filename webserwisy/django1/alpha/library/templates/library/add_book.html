@@ -1,0 +1,14 @@
+{% extends 'library/base.html' %}
+
+{% block content %}
+
+{# Przy form trzeba dodac takie htm znaczniki #}
+{# as_p dodaje znacznik p #}
+<form method="post">
+    {# to nam pozwala uaktywnic ten security przy formularzu #}
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Dodaj">
+</form>
+
+{% endblock %}

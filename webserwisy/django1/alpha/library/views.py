@@ -1,8 +1,9 @@
-from django.shortcuts import render
-# from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Book, Author
+from .forms import AddBookForm
+from django.urls import reverse
 
-# Create your views here.
 
 # To poniżej było na szybko przykładowe
 # def home(requests):
@@ -20,10 +21,36 @@ def home(requests):
     return render(requests, 'library/index.html', context)
 
 def book(request, book_id):
-    book = Book.objects.get(id=book_id)
+    # book = Book.objects.get(id=book_id)
+    # To poniżej to jest djangoshorcut i da nam 404 jeśli strona nie istnieje
+    book = get_object_or_404(Book, id=book_id)
+
     return render(request, 'library/book.html', {'book': book})
 
 def author(request, author_id):
     author = Author.objects.get(id=author_id)
     books = author.book_set.all()
     return render(request, 'library/author.html', {'author': author, 'books': books})
+
+def add_book(request):
+    if request.method == "POST":
+        form = AddBookForm(request.POST)
+        # Sprawdza czy sa sprawdzone wszystkie warunki formularza np. dlugosc ciagu i uzupelnia nam pole clean_data
+        if form.is_valid():
+            # cleaned_data to jest słownik z formularzy, ktory jest oczyszczony z przedrostków itp. Doczytac...
+            author = Author.objects.get(name=form.cleaned_data["author_name"])
+            book = Book(
+                title=form.cleaned_data["title"],
+                author=author,
+                description=form.cleaned_data["description"]
+            )
+            book.save()
+            # print(form.cleaned_data)
+            #reverse przechodzi na stronę, którą wygenerowaliśmy
+            return HttpResponseRedirect(reverse('book', args=(book.id,)))
+            # return HttpResponseRedirect(f"/books/{book.id}")
+            # return HttpResponse("Ok, dodaję tę książkę")
+    else:
+        form = AddBookForm()
+
+    return render(request, 'library/add_book.html', {'form': form})
