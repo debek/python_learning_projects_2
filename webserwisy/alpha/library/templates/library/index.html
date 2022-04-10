@@ -1,0 +1,28 @@
+{# TUTAAJ definiujemy zawartosc z base.html #}
+{% extends 'library/base.html' %}
+
+{# Tutaj w title z base.html definiujemy tutuł strony z zmiennej #}
+{% block title %}{{ title }}{% endblock %}}
+
+{# Pod tym wklejamy treść strony #}
+{% block content %}
+
+<h1>{{ title }}</h1>
+{# To fajne do debugowania poniżej czyli debugtools #}
+{# {% print %} #}
+{# {% print dump %} #}
+
+{% if books %}
+    Posiadamy następujęca książki:
+    <ul>
+    {% for book in books %}
+        {# <li><a href="/books/{{ book.id }}">Książka {{ book.title }}</a></li> #}
+        <li><a href="{% url 'book' book.id %}">Książka {{ book.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    Na razie brak książek
+{% endif %}
+
+{# A to jest koniec extends #}
+{% endblock %}}
