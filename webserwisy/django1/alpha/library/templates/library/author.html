@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ author.name }}</title>
-</head>
-<body>
+{% extends 'library/base.html' %}
 
-<h1>{{ author.name }}</h1>
+{% block title %}{{ author.name }}{% endblock %}
 
-Napisał książki:
+{% block content %}
+<h1>{{author.name}}</h1>
+
 <ul>
   {% for book in books %}
-  <li><a href="{% url 'book' book.id %}">Książka {{ book.title }}</a></li>
+  <li><a href="{% url 'book' book.id %}">{{ book.title }}</a></li>
   {% endfor %}
 </ul>
 
-</body>
-</html>
+{% endblock %}
