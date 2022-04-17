@@ -7,6 +7,9 @@
 </head>
 <body>
 <header><a href="{% url 'home'%}">Strona główna</a></header>
+<header><a href="{% url 'add book'%}">Dodaj książkę 1</a></header>
+<header><a href="{% url 'add book with modelform'%}">Dodaj książkę 2</a></header>
+<hr>
 {% if messages %}
     {% for message in messages %}
         <p>{{ message }}</p>

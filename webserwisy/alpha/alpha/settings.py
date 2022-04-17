@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Poniżej dopisujemy utworzoną przez nas aplikacje
     'library',
-    # To fajene do testowania zmiennych co w nich jest dokladnie
+    # To fajne do testowania zmiennych co w nich jest dokładnie. Paczka django-debugtools
     'debugtools',
 ]
 
