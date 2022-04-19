@@ -1,0 +1,3 @@
+{'highlights0': ['Movie: Film 1: <QuerySet [<Projection: Film 1 at Helios on 17.04.2022 20:10:13>]>'], 'highlights1': ['Movie: Film 2: <QuerySet [<Projection: Film 2 at Cienma on 17.04.2022 20:10:27>]>'], 'highlights2': ['Movie: Film 3: <QuerySet [<Projection: Film 3 at Mini kino on 17.04.2022 20:22:09>]>']}
+
+{'highlights0': 'Film 1: <QuerySet [<Projection: Film 1 at Helios on 17.04.2022 20:10:13>]>', 'highlights1': 'Film 2: <QuerySet [<Projection: Film 2 at Cienma on 17.04.2022 20:10:27>]>', 'highlights2': 'Film 3: <QuerySet [<Projection: Film 3 at Mini kino on 17.04.2022 20:22:09>]>'}

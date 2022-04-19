@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from .models import Movie
 
+
+highlights = Movie.objects.prefetch_related('projection_set').all()[:]
+
 def home(request):
     context = {
-        'highlights':
-            {Movie.objects.first(): Movie.objects.first().cinemas_that_play_it()},
+        'highlights': highlights
     }
     return render(request, "cinemas/index.html", context)
