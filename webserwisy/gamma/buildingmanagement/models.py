@@ -8,9 +8,9 @@ class Room(models.Model):
         return self.name
 
     def move_people_t(self, other_room, count=1):
-        self.people_count -= 1
+        self.people_count -= count
         self.save()
-        other_room.people_count += 1
+        other_room.people_count += count
         other_room.save()
 
 class Reservation(models.Model):
