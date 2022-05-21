@@ -1,6 +1,7 @@
 from django.db import models
 from django.db import transaction
 from django.db.models import F
+from django.db.models import UniqueConstraint
 
 
 class Room(models.Model):
@@ -49,6 +50,14 @@ class Reservation(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     date = models.DateField()
     user = models.CharField(max_length=255)
+
+    class Meta:
+        # Dzieki temu nie pozwalamy na dublikacje. Np. jak ktos chce tą samą salę zarezerować.
+        # unique_together = ["room", "date"]
+        constraints = [
+            UniqueConstraint(fields=["room", "date"], name="uniqe_rom_reservations")
+        ]
+        ordering = ['date']
 
     def __str__(self):
         return f"{self.room.name}/{self.date}"
