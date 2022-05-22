@@ -52,12 +52,14 @@ class Reservation(models.Model):
     user = models.CharField(max_length=255)
 
     class Meta:
-        # Dzieki temu nie pozwalamy na dublikacje. Np. jak ktos chce tą samą salę zarezerować.
-        # unique_together = ["room", "date"]
+        #unique_together = [["room", "date"]]
+        # from django.db.models import UniqueConstraint
         constraints = [
-            UniqueConstraint(fields=["room", "date"], name="uniqe_rom_reservations")
+            UniqueConstraint(fields=["room", "date"], name="unique_room_reservation")
         ]
         ordering = ['date']
+
+
 
     def __str__(self):
         return f"{self.room.name}/{self.date}"
